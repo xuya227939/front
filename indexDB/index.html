@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</script>
+<script>
+  function openDB() {
+    let DBOpenRequest = window.indexedDB.open("toDoList");
+    let storeName = 'toDoList';
+    DBOpenRequest.onerror = function(event) {
+    };
+
+    DBOpenRequest.onsuccess = function(e) {
+      console.log('%c 🦀 onsuccess: ', 'font-size:20px;background-color: #2EAFB0;color:#fff;');
+      db = DBOpenRequest.result;
+
+      db.onerror = function(event) {
+      };
+
+      putStore(e.target.result, { id: 8, hours: 19, minutes: 30, day: 24, month: "December", year: 2013 });
+      putStore(e.target.result, { id: 9, hours: 19, minutes: 30, day: 24, month: "December", year: 2013 });
+
+      removeStore(e.target.result, 8)
+      getStore(e.target.result, 8)
+      getStore(e.target.result, 9)
+    };
+
+    function putStore(db, module) {
+      let store = db.transaction([storeName], 'readwrite').objectStore(storeName);
+      let request = store.put(module);
+      request.onerror = err => { console.log(`Failed to store in wasm cache: ${err}`) };
+      request.onsuccess = err => { console.log(`Successfully stored in wasm cache`) };
+    }
+
+    function getStore(db, module) {
+      let store = db.transaction([storeName], 'readwrite').objectStore(storeName);
+      let request = store.get(module);
+      request.onsuccess = function (event) {
+        console.log(request.result);
+      };
+      request.onerror = function (event) {};
+    }
+
+    function removeStore(db, module) {
+      let objectStore = db.transaction([storeName], 'readwrite').objectStore(storeName);
+      let request = objectStore.delete(module);
+
+      request.onsuccess = function (event) {
+          
+      }
+    }
+
+    DBOpenRequest.onupgradeneeded = function(event) {
+      console.log('%c 🍲 onupgradeneeded: ', 'font-size:20px;background-color: #4b4b4b;color:#fff;')
+      db = event.target.result;
+
+      db.onerror = function(event) {
+      };
+
+      let objectStore = db.createObjectStore("toDoList", { keyPath: "id", autoIncrement: true });
+      objectStore.createIndex("id", "number", { unique: true });
+      objectStore.createIndex("hours", "hours", { unique: false });
+      objectStore.createIndex("minutes", "minutes", { unique: false });
+      objectStore.createIndex("day", "day", { unique: false });
+      objectStore.createIndex("month", "month", { unique: false });
+      objectStore.createIndex("year", "year", { unique: false });
+      objectStore.createIndex("notified", "notified", { unique: false });
+    };
+  }
+
+  openDB();
+</script>
+</head>
+<body></body>
+</html>
