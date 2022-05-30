@@ -1,0 +1,23 @@
+{
+  "name": "ffmpeg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@ffprobe-installer/ffprobe": "^1.4.1",
+    "cheerio": "^1.0.0-rc.11",
+    "cli-progress": "^3.11.1",
+    "express": "^4.18.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "https-proxy-agent": "^5.0.1",
+    "puppeteer": "^14.1.1",
+    "single-line-log": "^1.1.2",
+    "ytdl-core": "^4.11.0"
+  }
+}
