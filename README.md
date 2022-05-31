@@ -17,3 +17,5 @@
 ## webAssembly
 
 在这个例子中展示了，编译过后的 C++ || Rust || TS 代码，通过 webAssembly 解释器编译运行
+
+[C编译器](https://wasdk.github.io/WasmFiddle/)
